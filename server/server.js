@@ -2,9 +2,12 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 require('dotenv').config()
 const express = require('express');
-
+const volleyball = require('volleyball');
 // making the express app
 const app = express();
+// adding volleyball
+app.use(volleyball);
+
 const userRoutes = require('./routes/user.routes');
 
 app.use(express.static(__dirname));
@@ -44,3 +47,4 @@ app.listen(port, (err) => {
     }
     console.info('Server started on port %s.', port);
 });
+
