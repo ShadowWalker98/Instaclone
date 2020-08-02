@@ -4,6 +4,7 @@ require('dotenv').config()
 const express = require('express');
 const app = express();
 const userRoutes = require('./routes/user.routes');
+const authRoutes = require('./routes/auth.routes');
 const { once } = require('nodemon');
 const mongoUri = process.env.MONGO_URI;
 mongoose.connect(mongoUri, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true });
@@ -24,7 +25,7 @@ app.get('/', (req, res) => {
 });
 
 app.use('/users',userRoutes);
-
+app.use('/auth',authRoutes);
 
 const port = process.env.PORT || 3000;
 app.listen(port, (err) => {
