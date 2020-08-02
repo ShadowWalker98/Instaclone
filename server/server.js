@@ -2,9 +2,17 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 require('dotenv').config()
 const express = require('express');
+
+// making the express app
 const app = express();
 const userRoutes = require('./routes/user.routes');
-const { once } = require('nodemon');
+
+app.use(express.static(__dirname));
+
+
+
+// connecting to database
+// TODO: move this to another file
 const mongoUri = process.env.MONGO_URI;
 mongoose.connect(mongoUri, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true });
 mongoose.connection.once('open', () => {
@@ -15,7 +23,6 @@ mongoose.connection.on('error', () => {
 });
 
 app.use(bodyParser.urlencoded({ extended: true }));
-
 app.use(bodyParser.json());
 
 
@@ -23,8 +30,12 @@ app.get('/', (req, res) => {
     console.log("Hello me is alive");
 });
 
+// routing users path
+
 app.use('/users',userRoutes);
 
+
+// letting server listen
 
 const port = process.env.PORT || 3000;
 app.listen(port, (err) => {
