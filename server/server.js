@@ -8,7 +8,7 @@ const app = express();
 const userRoutes = require('./routes/user.routes');
 
 app.use(express.static(__dirname));
-
+const authRoutes = require('./routes/auth.routes');
 
 
 // connecting to database
@@ -33,7 +33,7 @@ app.get('/', (req, res) => {
 // routing users path
 
 app.use('/users',userRoutes);
-
+app.use('/auth',authRoutes);
 
 // letting server listen
 

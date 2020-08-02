@@ -11,6 +11,7 @@ const createUser = async (req,res) => {
     const user = new UserModelCreator(req.body.user);
     try {
         // added await to this call
+        //we need to add something to not allow duplicate values
         var result = await user.save();
         // sending the stored result back to the client
         res.send(result);
